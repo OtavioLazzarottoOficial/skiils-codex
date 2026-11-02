@@ -1,0 +1,3 @@
+interface:
+  display_name: "Iniciar frontend shadcn + TanStack"
+  short_description: "Base React com shadcn/ui e TanStack Router"

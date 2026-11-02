@@ -1,0 +1,3 @@
+interface:
+  display_name: "Criar monorepo fullstack"
+  short_description: "Une NestJS DDD e React com Turborepo e shared"
