@@ -46,7 +46,7 @@ A base usa npm workspaces, alinhado ao backend atual. Nomeie os pacotes @repo/ba
 
 ## Preparar as apps
 
-1. Use criar-estrutura-backend-ddd para gerar apps/backend. Neste fluxo, execute seu gerador com --skip-install para consolidar a instalação na raiz depois de preparar os manifests; isso não dispensa a instalação final.
+1. Use criar-estrutura-backend-ddd para gerar apps/backend. Neste fluxo, execute seu gerador com --skip-install --compose-root "<destino>" para consolidar a instalação na raiz depois de preparar os manifests; isso não dispensa a instalação final.
 2. Use iniciar-frontend-shadcn-tanstack em apps/frontend, com npm. Como o diretório já é parte de um workspace, prefira a configuração de Vite/shadcn para projeto existente ou um scaffold que preserve os manifests da raiz. Instale componentes reais pelo CLI oficial, direcionado a apps/frontend.
 3. Renomeie os manifests para @repo/backend e @repo/frontend. Adicione a ambos a dependência local "@repo/shared": "*" e preserve o nome/versão 0.0.0 do pacote shared; npm vincula o workspace local.
 4. Exponha dev, build, lint e typecheck nas duas apps. No backend, dev pode ser um alias de nest start --watch; preserve start:dev e os demais scripts da skill. Testes unitários e E2E do backend continuam disponíveis.
@@ -60,20 +60,22 @@ A base usa npm workspaces, alinhado ao backend atual. Nomeie os pacotes @repo/ba
 Depois de preparar as apps e antes da instalação final, execute:
 node "<pasta-desta-skill>/scripts/configure-connection.mjs" "<destino>"
 
-O [configurador](scripts/configure-connection.mjs) adiciona:
-- apps/backend/.env e .env.example: PORT=3000 e FRONTEND_URL=http://localhost:5173.
-- apps/frontend/.env e .env.example: VITE_API_URL=http://localhost:3000.
-- Validação do ambiente do backend com Zod e leitura do .env relativa ao arquivo, tanto em src quanto em dist. Variáveis do processo têm precedência.
-- CORS com lista explícita de origens, configurado antes de listen. Não libere "*" por padrão.
-- GET /connection no backend e /connection no frontend com botão e estados de carregamento, sucesso, erro HTTP, rede e timeout.
-- Contrato compartilhado exportado por @repo/shared/connection-check e testes do contrato HTTP/CORS e do cliente frontend.
-- Entradas .env e VITE_* no cache de tarefas do Turbo.
+O backend já fornece EnvModule/EnvService, Zod, Prisma, AuthModule, JWT RS256, bcryptjs, throttler, .env.example e um par RSA local. O gerador de backend cria compose.yaml na raiz indicada por --compose-root. Não duplique a infraestrutura em infra/config.
 
-Adicione um link para /connection na navegação do frontend, respeitando seu layout. A comunicação testada é chamada do navegador seguida de resposta da API; não crie uma chamada HTTP de retorno do servidor para uma SPA.
+O configurador adiciona:
+- .env e .env.example do frontend com VITE_API_URL=http://localhost:3000.
+- GET /connection com @Public() e sua página de diagnóstico no frontend.
+- Contrato @repo/shared/connection-check e testes HTTP/CORS com PrismaService substituído.
+- Scripts db:up/db:stop na raiz e configuração do cache/ambiente do Turbo.
 
-O script preserva .env já existente e recusa substituir arquivos de implementação personalizados. Se houver conflito, adapte os pontos indicados preservando o código; não force sobrescrita. Mantenha as URLs coerentes com as portas escolhidas. Se alterar a porta do frontend, ajuste também FRONTEND_URL.
+O backend usa CORS_ORIGINS, PORT, DATABASE_URL, JWT_PRIVATE_KEY e JWT_PUBLIC_KEY.
+Ajuste CORS_ORIGINS à origem real do frontend. Preserve .env e chaves existentes; nunca copie o par RSA de outro projeto. Não crie outra validação de ambiente nem substitua main.ts ou AuthModule para implementar o diagnóstico.
 
-Mantenha .env fora do Git e .env.example versionável e sem segredos. VITE_* é informação pública compilada no frontend. Se VITE_API_URL mudar, reinicie o Vite e refaça o build de produção.
+As rotas / e /health do backend são protegidas por JWT conforme o projeto-base. O endpoint /connection é explicitamente público para o diagnóstico inicial; não crie login nem entidades de usuário sem um pedido de funcionalidade.
+
+Adicione o link /connection à navegação do frontend. A comunicação é chamada do navegador e resposta da API, sem callback para a SPA. Mantenha .env ignorado e exemplos versionáveis; VITE_* contém apenas informação pública.
+
+O configurador recusa conflitos. Se houver código personalizado, adapte os pontos indicados sem sobrescrever alterações do usuário. Antes de conferir o backend em execução, inicie o Compose isolado do projeto; preserve bancos e contêineres externos.
 
 ## Código compartilhado e tarefas
 
@@ -82,7 +84,7 @@ Mantenha .env fora do Git e .env.example versionável e sem segredos. VITE_* é 
 - O pacote shared exporta JavaScript compilado e declarações em dist para funcionar no Node ESM e no Vite.
 - turbo.json usa tasks, build com dependsOn ["^build"] e outputs ["dist/**"]; dev é persistent e cache false. Preserve scripts do pacote raiz como orquestração, sem chamar a si mesmos recursivamente.
 - Shared precisa estar compilado antes de o backend importar seu JavaScript. A configuração de dev constrói dependências primeiro; ao adicionar uso ativo de shared, explique que alterações nele exigem rebuild/reinício ou configure um watcher apropriado ao fluxo.
-- Mantenha src/domain vazia no backend conforme a skill atual. Prisma, JWT, bcrypt e módulos opcionais entram quando a skill de backend ganhar esses incrementos; não anuncie bibliotecas ainda não instaladas.
+- Preserve os contratos em domain/auth/application/crypthograpy vindos da skill de backend; as entidades de negócio ainda não existem. Prisma, JWT RS256, bcryptjs e throttler já fazem parte da skill atual; não adicione modelos ou funcionalidades de usuário sem pedido.
 
 ## Verificação e entrega
 

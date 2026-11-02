@@ -1,12 +1,13 @@
 # Minhas skills do Codex
 
-Skills pessoais para iniciar projetos backend, frontend e monorepos fullstack.
+Skills pessoais para iniciar projetos backend, frontend e monorepos fullstack e implementar funcionalidades DDD.
 
 ## Skills incluídas
 
-- `criar-estrutura-backend-ddd`: base NestJS com TypeScript, Vitest e camadas DDD.
+- `criar-estrutura-backend-ddd`: base NestJS/DDD com Prisma 7, PostgreSQL Compose, ambiente Zod, JWT RS256, bcryptjs e throttler.
 - `iniciar-frontend-shadcn-tanstack`: base React, Vite, shadcn/ui e TanStack Router.
-- `criar-monorepo-fullstack`: monorepo Turborepo que utiliza as duas skills anteriores.
+- `criar-monorepo-fullstack`: monorepo Turborepo que utiliza as duas skills anteriores, com diagnóstico de conexão e CORS.
+- `criar-ciclo-ddd`: define a entidade conforme os requisitos e implementa o ciclo até os testes do caso de uso, com factories Faker; infraestrutura e frontend ficam para outras etapas.
 
 ## Instalar em outro computador
 
@@ -19,7 +20,7 @@ Copy-Item -Path './skills/*' -Destination "$env:USERPROFILE/.agents/skills" -Rec
 
 Se já houver skills com os mesmos nomes no destino, faça backup e compare antes de substituí-las. Para atualizar uma instalação existente de forma intencional, use `Copy-Item` com `-Force` após revisar as alterações.
 
-No macOS/Linux, copie as três pastas de `skills/` para `~/.agents/skills/`.
+No macOS/Linux, copie as quatro pastas de `skills/` para `~/.agents/skills/`.
 
 Reinicie o Codex caso as skills não apareçam. Peça no chat, por exemplo:
 

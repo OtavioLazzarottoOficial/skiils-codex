@@ -1,0 +1,3 @@
+interface:
+  display_name: "Criar ciclo DDD"
+  short_description: "Da entidade aos testes do caso de uso"
