@@ -1,4 +1,4 @@
-import { UniqueEntityID } from './unique-entity-id.js';
+import { UniqueEntityID } from './unique-entity-id.ts';
 
 export abstract class Entity<Props> {
   private _id: UniqueEntityID;
@@ -18,7 +18,7 @@ export abstract class Entity<Props> {
       return true;
     }
 
-    if (entity.id === this._id) {
+    if (this._id.equals(entity.id)) {
       return true;
     }
 

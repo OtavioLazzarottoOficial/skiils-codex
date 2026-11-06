@@ -1,6 +1,6 @@
-import { Entity } from "../../../core/entities/entity.js";
-import { UniqueEntityID } from "../../../core/entities/unique-entity-id.js";
-import type { Optional } from "../../../core/types/optional.js";
+import { Entity } from "../../../core/entities/entity.ts";
+import { UniqueEntityID } from "../../../core/entities/unique-entity-id.ts";
+import type { Optional } from "../../../core/types/optional.ts";
 
 export interface ProductProps {
   name: string;

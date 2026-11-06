@@ -1,10 +1,10 @@
 import { fileURLToPath } from 'node:url';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { envSchema } from './env/env.js';
-import { AuthModule } from './auth/auth.module.js';
-import { HttpModule } from './http/http.module.js';
-import { EnvModule } from './env/env.module.js';
+import { envSchema } from './env/env.ts';
+import { AuthModule } from './auth/auth.module.ts';
+import { HttpModule } from './http/http.module.ts';
+import { EnvModule } from './env/env.module.ts';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 

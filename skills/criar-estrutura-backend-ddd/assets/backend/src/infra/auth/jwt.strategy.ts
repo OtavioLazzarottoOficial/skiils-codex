@@ -1,6 +1,6 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { EnvService } from '../env/env.service.js';
+import { EnvService } from '../env/env.service.ts';
 import z from 'zod';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 

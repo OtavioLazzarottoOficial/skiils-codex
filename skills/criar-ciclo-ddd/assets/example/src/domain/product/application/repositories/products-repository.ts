@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import type { Product } from "../../enterprise/product.js";
+import type { Product } from "../../enterprise/product.ts";
 
 @Injectable()
 export abstract class ProductsRepository {

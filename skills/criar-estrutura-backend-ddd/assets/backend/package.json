@@ -78,7 +78,9 @@
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
     "vitest": "^4.1.2",
-    "@types/passport": "^1.0.17"
+    "@types/passport": "^1.0.17",
+    "unplugin-swc": "^2.0.0",
+    "@swc/core": "^1.16.21"
   },
   "engines": {
     "node": ">=24.15.0"

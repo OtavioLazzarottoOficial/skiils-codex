@@ -1,4 +1,4 @@
-import { Encrypter } from '../../src/domain/auth/application/crypthograpy/encrypter.js';
+import { Encrypter } from '../../src/domain/auth/application/crypthograpy/encrypter.ts';
 
 export class FakerJWT implements Encrypter {
   async encrypty(payload: any): Promise<string> {

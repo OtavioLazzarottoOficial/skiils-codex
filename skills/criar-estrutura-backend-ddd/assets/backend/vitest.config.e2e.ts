@@ -1,10 +1,13 @@
 import { defineConfig } from 'vitest/config';
+import { createTestTransform } from './vitest.shared.ts';
 
 export default defineConfig({
+  plugins: [createTestTransform()],
   resolve: { tsconfigPaths: true },
   test: {
     globals: true,
     root: './',
-    include: ['**/*.e2e-spec.ts'],
+    setupFiles: ['./test/setup.ts'],
+    include: ['test/**/*.e2e-spec.ts'],
   },
 });

@@ -1,6 +1,6 @@
-import { AggregateRoot } from '../entities/aggregate-root.js';
-import { UniqueEntityID } from '../entities/unique-entity-id.js';
-import { DomainEvent } from './domain-event.js';
+import { AggregateRoot } from '../entities/aggregate-root.ts';
+import { UniqueEntityID } from '../entities/unique-entity-id.ts';
+import { DomainEvent } from './domain-event.ts';
 
 type DomainEventCallback = (event: DomainEvent) => void;
 

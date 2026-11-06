@@ -5,9 +5,9 @@ export abstract class ValueObject<Props> {
     this.props = props;
   }
 
-  public equals(vo: ValueObject<unknown>) {
+  public equals(vo: ValueObject<unknown> | null | undefined) {
     if (vo === null || vo === undefined) {
-      return true;
+      return false;
     }
 
     if (vo.props === undefined) {

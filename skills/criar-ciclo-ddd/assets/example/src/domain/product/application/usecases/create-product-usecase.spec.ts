@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { CreateProductUseCase } from "./create-product-usecase.js";
-import { ProductsRepositoryInMemory } from "../../../../../test/repository-in-memory/products-repository-in-memory.js";
-import { makeProduct } from "../../../../../test/factories/make-product.js";
-import { UniqueEntityID } from "../../../../core/entities/unique-entity-id.js";
+import { CreateProductUseCase } from "./create-product-usecase.ts";
+import { ProductsRepositoryInMemory } from "../../../../../test/repository-in-memory/products-repository-in-memory.ts";
+import { makeProduct } from "../../../../../test/factories/make-product.ts";
+import { UniqueEntityID } from "../../../../core/entities/unique-entity-id.ts";
 
 describe("Create Product Use Case", () => {
   let productsRepository: ProductsRepositoryInMemory;

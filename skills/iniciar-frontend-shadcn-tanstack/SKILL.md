@@ -48,6 +48,14 @@ Preserve convenções de nomes especiais do roteador e arquivos gerados. Use keb
 - Preserve semântica, foco visível, nomes acessíveis e navegação por teclado.
 - Adicione Query, Form, estado global ou outras bibliotecas quando os requisitos concretos precisarem delas.
 
+## Usabilidade e clareza da interface
+
+- Pense nas tarefas de quem usa o produto pela primeira vez: identifique o objetivo da tela, as ações disponíveis para cada perfil e o próximo passo. Use o contexto e os requisitos confirmados; quando uma permissão ou regra de negócio não estiver clara, esclareça-a em vez de inventá-la.
+- Prefira rótulos, botões e mensagens em linguagem do público, com hierarquia visual clara. Explique junto à ação os requisitos, as restrições relevantes e, quando útil, por que uma opção não está disponível e como prosseguir; não dependa de documentação externa para uma tarefa comum.
+- Ao criar fluxos interativos solicitados, apresente estados de carregamento, ausência de dados, sucesso e erro adequados; preserve os dados preenchidos quando possível e ofereça uma próxima ação. Evite ações ou controles que aparentem funcionar sem estarem implementados.
+- Faça formulários e navegação utilizáveis por teclado e tecnologias assistivas, com foco visível, nomes acessíveis e mensagens compreensíveis. Adapte a apresentação a celular e desktop, mantendo coerência com o design e os componentes existentes.
+- Quando houver navegador disponível, percorra as tarefas incluídas na entrega como uma pessoa sem conhecimento do sistema. Verifique se é possível identificar o objetivo, executar a ação e entender o resultado e as restrições; registre limites ou problemas não verificados.
+
 ## Verificar e entregar
 
 - Instale dependências, preserve o lockfile e disponibilize scripts para dev, build, checagem de tipos e lint. Reutilize os scripts e ferramentas existentes.

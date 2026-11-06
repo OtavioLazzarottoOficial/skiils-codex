@@ -1,37 +1,46 @@
 # Minhas skills do Codex
 
-Skills pessoais para iniciar projetos backend, frontend e monorepos fullstack e implementar funcionalidades DDD.
+Skills pessoais para definir projetos e desenvolver backends TypeScript/NestJS com DDD, persistência Prisma e HTTP, além de iniciar frontends e monorepos fullstack.
 
 ## Skills incluídas
 
-- `criar-estrutura-backend-ddd`: base NestJS/DDD com Prisma 7, PostgreSQL Compose, ambiente Zod, JWT RS256, bcryptjs e throttler.
-- `iniciar-frontend-shadcn-tanstack`: base React, Vite, shadcn/ui e TanStack Router.
-- `criar-monorepo-fullstack`: monorepo Turborepo que utiliza as duas skills anteriores, com diagnóstico de conexão e CORS.
-- `criar-ciclo-ddd`: define a entidade conforme os requisitos e implementa o ciclo até os testes do caso de uso, com factories Faker; infraestrutura e frontend ficam para outras etapas.
+- `definir-projeto`: levantar e documentar contexto, requisitos, regras e plano de implementação.
+- `criar-estrutura-backend-ddd`: criar a base NestJS/DDD com Prisma, PostgreSQL e autenticação.
+- `criar-ciclo-ddd`: implementar o domínio, os contratos e os testes de um caso de uso.
+- `criar-persistencia-prisma`: implementar a persistência Prisma de um ciclo existente.
+- `criar-http-nestjs`: expor o ciclo por HTTP com validação, testes e exemplos para REST Client.
+- `iniciar-frontend-shadcn-tanstack`: criar a base React com Vite, shadcn/ui e TanStack Router, com atenção à usabilidade.
+- `criar-monorepo-fullstack`: criar um monorepo integrando as bases especializadas de backend e frontend.
 
 ## Instalar em outro computador
 
-Clone este repositório e execute, no PowerShell, dentro da pasta clonada:
+Clone este repositório e, dentro da pasta clonada, execute no PowerShell:
 
 ```powershell
-New-Item -ItemType Directory -Path "$env:USERPROFILE/.agents/skills" -Force | Out-Null
-Copy-Item -Path './skills/*' -Destination "$env:USERPROFILE/.agents/skills" -Recurse
+$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $env:USERPROFILE '.codex' }
+$destino = Join-Path $codexHome 'skills'
+New-Item -ItemType Directory -Path $destino -Force | Out-Null
+Copy-Item -Path '.\skills\*' -Destination $destino -Recurse -Force
 ```
 
-Se já houver skills com os mesmos nomes no destino, faça backup e compare antes de substituí-las. Para atualizar uma instalação existente de forma intencional, use `Copy-Item` com `-Force` após revisar as alterações.
+O comando substitui arquivos de mesmo nome no destino. Se houver alterações locais que deseja manter, faça backup e compare antes de executar. Ele não remove arquivos antigos que existam apenas no destino.
 
-No macOS/Linux, copie as quatro pastas de `skills/` para `~/.agents/skills/`.
+No macOS ou Linux, dentro da pasta clonada:
 
-Reinicie o Codex caso as skills não apareçam. Peça no chat, por exemplo:
+```bash
+CODEX_SKILLS_HOME="${CODEX_HOME:-$HOME/.codex}"
+mkdir -p "$CODEX_SKILLS_HOME/skills"
+cp -R skills/. "$CODEX_SKILLS_HOME/skills/"
+```
 
-> Use a skill criar-monorepo-fullstack para iniciar meu projeto.
+Reinicie o Codex se as skills não aparecerem. Por exemplo, peça no chat: “Use a skill criar-monorepo-fullstack para iniciar meu projeto.”
 
-As skills de desenvolvimento exigem Node.js e npm compatíveis com suas instruções. O monorepo exige as três skills instaladas. Plugins e credenciais não estão incluídos.
+Cada skill pode depender das outras skills indicadas em suas instruções. Instale todas as pastas deste repositório para manter os fluxos completos. Node.js, npm e Docker podem ser necessários conforme o projeto. Plugins, credenciais e arquivos de ambiente pessoais não estão incluídos.
 
 ## Atualizar
 
-Execute `git pull` na cópia deste repositório e copie novamente as pastas para o diretório de skills após revisar as alterações.
+Execute `git pull` na cópia deste repositório, compare com suas alterações locais e repita a cópia para o diretório de skills.
 
 ## Documentação
 
-https://learn.chatgpt.com/docs/build-skills
+[Documentação sobre skills](https://learn.chatgpt.com/docs/build-skills).

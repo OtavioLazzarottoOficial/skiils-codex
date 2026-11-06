@@ -4,7 +4,7 @@ import {
   Inject,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma/prisma.service.js';
+import { PrismaService } from '../../database/prisma/prisma.service.ts';
 
 @Controller('health')
 export class HealthController {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { EnvModule } from '../env/env.module.js';
-import { PrismaService } from './prisma/prisma.service.js';
+import { EnvModule } from '../env/env.module.ts';
+import { PrismaService } from './prisma/prisma.service.ts';
 
 @Module({
   imports: [EnvModule],

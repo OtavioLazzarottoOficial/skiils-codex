@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '../database/database.module.js';
-import { AppController } from './app.controller.js';
-import { HealthController } from './controllers/health.controller.js';
-import { CryptographyModule } from '../cryptography/cryptography.module.js';
+import { DatabaseModule } from '../database/database.module.ts';
+import { AppController } from './app.controller.ts';
+import { HealthController } from './controllers/health.controller.ts';
+import { CryptographyModule } from '../cryptography/cryptography.module.ts';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],

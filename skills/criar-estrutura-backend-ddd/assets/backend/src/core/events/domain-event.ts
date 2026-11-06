@@ -1,4 +1,4 @@
-import { UniqueEntityID } from '../entities/unique-entity-id.js';
+import { UniqueEntityID } from '../entities/unique-entity-id.ts';
 
 export interface DomainEvent {
   ocurredAt: Date;

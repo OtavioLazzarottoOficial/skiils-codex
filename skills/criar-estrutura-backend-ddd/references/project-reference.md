@@ -11,3 +11,6 @@ As escolhas de arquitetura, nomes e algoritmos do projeto foram mantidas. A conf
 Os testes do template cobrem o comportamento novo; a fonte original mantém seus arquivos.
 
 Correção de organização confirmada em O:/www/novo-backend: ZodValidationPipe fica em src/infra/http/pipes/zod-validation-pipe.ts. A pasta filters permanece disponível para filtros HTTP.
+
+
+Padrão atual: imports relativos .ts no código-fonte, rewriteRelativeImportExtensions no build e Vitest com SWC para emissão de metadados de decorators em todos os níveis de teste.

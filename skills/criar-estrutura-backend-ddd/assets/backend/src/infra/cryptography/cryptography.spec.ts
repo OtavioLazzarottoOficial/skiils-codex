@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { BcryptHasher } from './bcrypt-hasher.js';
-import { ZodValidationPipe } from '../http/pipes/zod-validation-pipe.js';
+import { BcryptHasher } from './bcrypt-hasher.ts';
+import { ZodValidationPipe } from '../http/pipes/zod-validation-pipe.ts';
 import { z } from 'zod';
 
 describe('infraestrutura de criptografia e validação', () => {

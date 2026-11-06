@@ -3,9 +3,9 @@ import { Test } from '@nestjs/testing';
 import { JwtService } from '@nestjs/jwt';
 import request from 'supertest';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
-import { AppModule } from '../src/infra/app.module.js';
-import { PrismaService } from '../src/infra/database/prisma/prisma.service.js';
-import { Public } from '../src/infra/auth/public.js';
+import { AppModule } from '../src/infra/app.module.ts';
+import { PrismaService } from '../src/infra/database/prisma/prisma.service.ts';
+import { Public } from '../src/infra/auth/public.ts';
 
 @Controller('_test')
 class PublicTestController {

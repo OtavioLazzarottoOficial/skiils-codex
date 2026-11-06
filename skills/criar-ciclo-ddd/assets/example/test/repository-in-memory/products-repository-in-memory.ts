@@ -1,5 +1,5 @@
-import { ProductsRepository } from "../../src/domain/product/application/repositories/products-repository.js";
-import type { Product } from "../../src/domain/product/enterprise/product.js";
+import { ProductsRepository } from "../../src/domain/product/application/repositories/products-repository.ts";
+import type { Product } from "../../src/domain/product/enterprise/product.ts";
 
 export class ProductsRepositoryInMemory extends ProductsRepository {
   public items: Product[] = [];

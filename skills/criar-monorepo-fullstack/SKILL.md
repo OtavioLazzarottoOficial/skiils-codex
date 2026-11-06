@@ -35,6 +35,14 @@ Localize-as pelo catálogo ou pelas pastas irmãs desta skill. Não copie o cont
 
 A base usa npm workspaces, alinhado ao backend atual. Nomeie os pacotes @repo/backend, @repo/frontend e @repo/shared. Em um workspace existente com outro gerenciador, respeite sua escolha e adapte os comandos e vínculos, sem misturar lockfiles.
 
+## Definição compartilhada do projeto
+
+Antes da geração, consulte a conversa e os documentos existentes na raiz. Use a skill irmã [definir-projeto](../definir-projeto/SKILL.md) para levantar as informações de negócio ainda necessárias e organizar docs/project-definition.md e docs/implementation-plan.md (ou reutilizar documentos equivalentes). A definição contempla segmento, objetivo, atores, escopo, RF, RN, RNF, critérios de aceitação e tarefas ordenadas por dependência.
+
+Conduza o levantamento uma única vez para o projeto inteiro; ao chamar as skills das apps, forneça os caminhos desses documentos e as decisões já tomadas. Não replique documentação ou perguntas em cada app. Integre resumo e links no README da raiz após a geração, preservando instruções técnicas; os documentos em docs podem ser preparados antes.
+
+Questões de funcionalidades futuras não bloqueiam uma base técnica autorizada. Se o usuário pedir somente a base ou adiar o levantamento, registre essa escolha e o contexto ainda aberto, sem presumir regras pelo nome do projeto. A documentação orienta os próximos ciclos, não dispara implementação de funcionalidades previstas no plano. Registre no plano a conclusão da base apenas após as verificações efetivamente executadas.
+
 ## Preparação da raiz
 
 - Resolva o destino a partir do pedido. Se não for inferível, pergunte.
@@ -62,7 +70,7 @@ node "<pasta-desta-skill>/scripts/configure-connection.mjs" "<destino>"
 
 O backend já fornece EnvModule/EnvService, Zod, Prisma, AuthModule, JWT RS256, bcryptjs, throttler, .env.example e um par RSA local. O gerador de backend cria compose.yaml na raiz indicada por --compose-root. Não duplique a infraestrutura em infra/config.
 
-O configurador adiciona:
+O configurador usa arquivos reais em assets/connection (mantenha essa pasta ao transportar a skill), verifica a compatibilidade da base e adiciona:
 - .env e .env.example do frontend com VITE_API_URL=http://localhost:3000.
 - GET /connection com @Public() e sua página de diagnóstico no frontend.
 - Contrato @repo/shared/connection-check e testes HTTP/CORS com PrismaService substituído.
@@ -103,3 +111,14 @@ Consulte quando a etapa exigir:
 - Workspaces e estrutura: https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository
 - Tarefas e cache: https://turborepo.dev/docs/crafting-your-repository/configuring-tasks
 - Frontend e backend: links mantidos nas respectivas skills.
+
+
+## Padrões compartilhados com as skills atuais
+
+- Leia as versões instaladas das skills de backend e frontend e preserve suas configurações. A composição não deve reintroduzir padrões antigos por meio de arquivos auxiliares.
+- Imports relativos do código TypeScript autoral usam .ts (ou .tsx para componentes). Backend e shared mantêm rewriteRelativeImportExtensions para emitir imports .js no build ESM. Os exports de package.json apontam para JavaScript e declarações compilados em dist; não os troque por .ts. Imports de pacotes como @repo/shared/connection-check mantêm o subpath público.
+- Use exclusivamente Vitest nos testes unitários, HTTP/E2E e de integração das apps. Preserve Vitest/SWC com legacyDecorator, decoratorMetadata e reflect-metadata no backend para testar a injeção real do NestJS. Não introduza node:test/Jest nem substitua a configuração herdada do backend.
+- Preserve @Injectable() na aplicação como escolha intencional, contratos abstratos como tokens/imports de valor e dependências private readonly. Entidades e objetos de valor independem de NestJS, Prisma e HTTP. Funcionalidades futuras seguem criar-ciclo-ddd, criar-persistencia-prisma e criar-http-nestjs; os testes de usuários/despesas não pertencem à base do monorepo.
+- O configurador de conexão recusa uma base sem rewriteRelativeImportExtensions ou sem a configuração compartilhada do Vitest atual; atualize a preparação do backend, sem remendar imports para .js.
+- Revise a legibilidade dos arquivos gerados: linhas em branco entre métodos, validações e etapas; guard clauses com chaves e retorno em linha própria. Execute o formatador configurado nas apps antes de build, typecheck, lint e testes. Exclua routeTree.gen.ts da formatação/lint e não instale ferramentas duplicadas.
+- Ao mudar templates de conexão, valide scripts e geração em um destino descartável com o backend atual. Confira os imports gerados, os testes Vitest de conexão/CORS e do cliente HTTP, o build do shared e do backend e a preservação de arquivos incompatíveis. Não declare a skill inteira testada apenas por validar o Markdown.

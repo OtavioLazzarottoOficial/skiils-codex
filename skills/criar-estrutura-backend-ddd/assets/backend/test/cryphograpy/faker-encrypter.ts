@@ -1,5 +1,5 @@
-import { HashComparer } from '../../src/domain/auth/application/crypthograpy/hash-comparer.js';
-import { HashGenerator } from '../../src/domain/auth/application/crypthograpy/hash-generator.js';
+import { HashComparer } from '../../src/domain/auth/application/crypthograpy/hash-comparer.ts';
+import { HashGenerator } from '../../src/domain/auth/application/crypthograpy/hash-generator.ts';
 
 export class FakerEncrypter implements HashGenerator, HashComparer {
   async hash(value: string): Promise<string> {

@@ -18,7 +18,11 @@
     "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "types": ["vitest/globals", "node"],
-    "verbatimModuleSyntax": false
+    "types": [
+      "vitest/globals",
+      "node"
+    ],
+    "verbatimModuleSyntax": false,
+    "rewriteRelativeImportExtensions": true
   }
 }
